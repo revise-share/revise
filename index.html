@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Download Revise App</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -19,6 +20,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      padding: 1rem;
     }
 
     .card {
@@ -27,20 +29,26 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       padding: 2rem;
       text-align: center;
-      max-width: 400px;
-      width: 90%;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 1rem;
     }
 
     .card h1 {
-      font-size: 28px;
+      font-size: 26px;
       color: #333;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .card p {
       color: #666;
       font-size: 16px;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     .download-btn {
@@ -54,10 +62,21 @@
       font-weight: 600;
       transition: background-color 0.3s ease;
       display: inline-block;
+      margin-bottom: 1rem;
     }
 
     .download-btn:hover {
       background-color: #0056b3;
+    }
+
+    .version {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+
+    .qr-code {
+      margin-top: 1rem;
     }
 
     .footer {
@@ -69,12 +88,31 @@
 </head>
 <body>
   <div class="card">
+    <img src="logo.png" alt="App Logo" class="logo" />
     <h1>📱 Revise App</h1>
-    <p>Download the latest version of the Revise Android app below:</p>
-    <a class="download-btn" href="Revise.apk" download>⬇ Download APK</a>
+    <p>Download the latest version of the app below:</p>
+    <div class="version" id="versionText">Version: 1.0 | Release: 2025-07-09</div>
+    <a class="download-btn" href="app-release.apk" download>⬇ Download APK</a>
+    <div class="qr-code">
+      <canvas id="qrCanvas"></canvas>
+      <p style="font-size: 12px; color: #888;">Scan to download on your phone</p>
+    </div>
     <div class="footer">
-      <p>Developed by M Verma | v1.0</p>
+      Developed by M Verma
     </div>
   </div>
+
+  <script>
+    // Dynamically set version/date (optional auto)
+    const version = "1.0";
+    const releaseDate = new Date().toISOString().split("T")[0];
+    document.getElementById("versionText").textContent = `Version: ${version} | Release: ${releaseDate}`;
+
+    // QR code generator (points to hosted APK)
+    const apkUrl = window.location.href.replace("index.html", "") + "Revise.apk";
+    QRCode.toCanvas(document.getElementById("qrCanvas"), apkUrl, {
+      width: 140
+    });
+  </script>
 </body>
 </html>
