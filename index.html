@@ -92,8 +92,8 @@
     <img src="logo.png" alt="App Logo" class="logo" />
     <h1>📱 Revise App</h1>
     <p>Download the latest version of the app below:</p>
-    <div class="version" id="versionText">Version: 1.1 | Release: 2025-07-10</div>
-    <a class="download-btn" href="Revise v1.1.apk" download>Download APK ⬇</a>
+    <div class="version" id="versionText">Version: 1.2 | Release: 2025-07-10</div>
+    <a class="download-btn" href="Revise v1.2.apk" download>Download APK ⬇</a>
     <div class="qr-code">
       <canvas id="qrCanvas"></canvas>
       <p style="font-size: 12px; color: #888;">Scan to download on your phone</p>
@@ -105,12 +105,12 @@
 
   <script>
     // Dynamically set version/date (optional auto)
-    const version = "1.1";
+    const version = "1.2";
     const releaseDate = new Date().toISOString().split("T")[0];
     document.getElementById("versionText").textContent = `Version: ${version} | Release: ${releaseDate}`;
 
     // QR code generator (points to hosted APK)
-    const apkUrl = window.location.href.replace("index.html", "") + "Revise v1.1.apk";
+    const apkUrl = window.location.href.replace("index.html", "") + "Revise v1.2.apk";
     QRCode.toCanvas(document.getElementById("qrCanvas"), apkUrl, {
       width: 140
     });
