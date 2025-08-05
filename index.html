@@ -37,222 +37,51 @@
         justify-content: center;
         align-items: center;
     }
+    
+    /* --- MODIFIED: Modal content now uses flexbox and has a max-height --- */
     .modal-content {
         background: white;
         padding: 2rem;
         border-radius: 16px;
-        text-align: center;
-        max-width: 420px;
-        width: 90%;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    }
-    .modal-content h2 {
-        color: #d32f2f; /* Red warning color */
-        margin-bottom: 1rem;
-        font-size: 24px;
-    }
-    .modal-content p {
-        color: #555;
-        font-size: 16px;
-        margin-bottom: 1.5rem;
-        line-height: 1.5;
-    }
-    .modal-buttons {
-        display: flex;
-        justify-content: space-around;
-    }
-    .modal-btn {
-        padding: 12px 24px;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    .accept-btn {
-        background-color: #28a745; /* Green */
-        color: white;
-    }
-    .accept-btn:hover {
-        background-color: #218838;
-    }
-    .deny-btn {
-        background-color: #f5f5f5;
-        color: #333;
-        border: 1px solid #ddd;
-    }
-    .deny-btn:hover {
-        background-color: #e0e0e0;
-    }
-
-    /* Main card styles */
-    .card {
-      display: none; /* Hidden by default */
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-      text-align: center;
-      max-width: 420px;
-      width: 100%;
-    }
-
-    .logo {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 1rem;
-    }
-
-    .card h1 {
-      font-size: 26px;
-      color: #333;
-      margin-bottom: 0.5rem;
-    }
-
-    .card p {
-      color: #666;
-      font-size: 16px;
-      margin-bottom: 1rem;
-    }
-
-    .download-btn {
-      background-color: #007bff;
-      color: white;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-      display: inline-block;
-      margin-bottom: 1rem;
-    }
-
-    .download-btn:hover {
-      background-color: #0056b3;
-    }
-
-    .version {
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 1rem;
-    }
-    
-    .denied-message {
-        display: none; /* Hidden by default */
-        text-align: center;
-        color: #555;
-    }
-
-  </style>
-</head>
-<body>
-
-  <div id="warningModal" class="modal">
-    <div class="modal-content">
-      <h2>⚠️ Important Warning ⚠️</h2>
-      <p>
-        Updating to this version will DELETE ALL EXISTING DATA from older versions of the app (v1.6 and below).
-        <br><br>
-        It is highly recommended to use the IN-APP BACKUP & RESTORE FEATURE on the new version (v1.7+) to protect your data going forward.
-      </p>
-      <div class="modal-buttons">
-        <button id="denyBtn" class="modal-btn deny-btn">Deny</button>
-        <button id="acceptBtn" class="modal-btn accept-btn">Accept & Continue</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="downloadCard" class="card">
-    <img src="logo.png" alt="App Logo" class="logo" />
-    <h1>📱 Revise App</h1>
-    <p>Download the latest version of the app below:</p>
-    <div class="version" id="versionText"></div>
-    <a class="download-btn" id="downloadLink" href="" download>Download APK ⬇</a>
-    <div class="qr-code">
-      <canvas id="qrCanvas"></canvas>
-      <p style="font-size: 12px; color: #888;">Scan to download on your phone</p>
-    </div>
-    <div class="footer">
-      Developed by M.K. Verma
-    </div>
-  </div>
-  
-  <div id="deniedMessage" class="denied-message">
-    <h2>Download Cancelled</h2>
-    <p>Please use the official app store for updates if you wish to preserve your data.</p>
-  </div>
-
-  <script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Download Revise App</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      padding: 1rem;
-    }
-    
-    /* Modal styles */
-    .modal {
-        position: fixed;
-        z-index: 100;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.6);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .modal-content {
-        background: white;
-        padding: 2rem;
-        border-radius: 16px;
-        text-align: left; /* Aligned left for a more professional look */
+        text-align: left;
         max-width: 450px;
         width: 90%;
         box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        max-height: 85vh; /* Prevents modal from being taller than the screen */
     }
+    
+    /* --- NEW: This is the scrollable container for the message --- */
+    .modal-body {
+        overflow-y: auto; /* Adds a scrollbar ONLY if needed */
+        margin: 1rem 0;
+        padding-right: 1rem; /* Space for the scrollbar */
+    }
+
     .modal-content h2 {
         color: #333;
-        margin-bottom: 1rem;
+        margin-bottom: 0; /* Adjusted margin */
         font-size: 22px;
         font-weight: 700;
+        flex-shrink: 0; /* Prevents header from shrinking */
     }
     .modal-content p {
         color: #555;
         font-size: 16px;
-        margin-bottom: 1rem;
         line-height: 1.6;
+        margin-bottom: 0; /* Handled by modal-body */
     }
     .modal-content strong {
-        color: #c0392b; /* A softer red for emphasis */
+        color: #c0392b;
     }
     .modal-buttons {
         display: flex;
-        justify-content: flex-end; /* Buttons to the right */
+        justify-content: flex-end;
         margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+        flex-shrink: 0; /* Prevents buttons from shrinking */
     }
     .modal-btn {
         padding: 12px 24px;
@@ -264,50 +93,20 @@
         transition: all 0.3s ease;
         margin-left: 0.5rem;
     }
-    .accept-btn {
-        background-color: #28a745;
-        color: white;
-    }
-    .accept-btn:hover {
-        background-color: #218838;
-    }
-    .deny-btn {
-        background-color: #f5f5f5;
-        color: #333;
-        border: 1px solid #ddd;
-    }
-    .deny-btn:hover {
-        background-color: #e0e0e0;
-    }
+    .accept-btn { background-color: #28a745; color: white; }
+    .accept-btn:hover { background-color: #218838; }
+    .deny-btn { background-color: #f5f5f5; color: #333; border: 1px solid #ddd; }
+    .deny-btn:hover { background-color: #e0e0e0; }
 
-    /* Main card styles */
-    .card {
-      display: none; /* Hidden by default */
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-      text-align: center;
-      max-width: 420px;
-      width: 100%;
-    }
+    /* Main card and denied message styles (unchanged) */
+    .card { display: none; background: white; border-radius: 16px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); padding: 2rem; text-align: center; max-width: 420px; width: 100%; }
     .logo { width: 100px; height: 100px; margin-bottom: 1rem; }
     .card h1 { font-size: 26px; color: #333; margin-bottom: 0.5rem; }
     .card p { color: #666; font-size: 16px; margin-bottom: 1rem; }
     .download-btn { background-color: #007bff; color: white; padding: 14px 28px; border: none; border-radius: 8px; text-decoration: none; font-size: 18px; font-weight: 600; transition: background-color 0.3s ease; display: inline-block; margin-bottom: 1rem; }
     .download-btn:hover { background-color: #0056b3; }
     .version { font-size: 14px; color: #888; margin-bottom: 1rem; }
-    
-    .denied-message {
-        display: none;
-        background: white;
-        padding: 2rem;
-        border-radius: 16px;
-        text-align: left;
-        max-width: 450px;
-        width: 90%;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
+    .denied-message { display: none; background: white; padding: 2rem; border-radius: 16px; text-align: left; max-width: 450px; width: 90%; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
     .denied-message h2 { color: #333; margin-bottom: 1rem; }
     .denied-message p { color: #555; line-height: 1.6; }
 
@@ -318,21 +117,25 @@
   <div id="warningModal" class="modal">
     <div class="modal-content">
       <h2>Important Update Information</h2>
-      <p>
-        Hello,
-        <br><br>
-        We're writing to inform you about an important upcoming update to the Revise app. We are excited to introduce a powerful new offline <strong>Backup and Restore</strong> feature. This has been a top request and will allow you to save, merge, and transfer your valuable question data securely in the future.
-        <br><br>
-        To implement this significant improvement, users on older versions (v1.5 and below) will have their <strong>local data reset</strong> upon updating to the new version (v1.7+).
-        <br><br>
-        We made our utmost efforts to find a way to preserve the data through this transition, but unfortunately, the scale of this necessary architectural change made it impossible. We are truly sorry for this one-time inconvenience.
-        <br><br>
-        Once you update, you can immediately use the new backup feature to protect your data going forward.
-        <br><br>
-        Thank you for your understanding and for being a part of the Revise community.
-        <br>
-        - The Revise App Team
-      </p>
+      
+      <div class="modal-body">
+        <p>
+          Hello,
+          <br><br>
+          We're writing to inform you about an important upcoming update to the Revise app. We are excited to introduce a powerful new offline <strong>Backup and Restore</strong> feature. This has been a top request and will allow you to save, merge, and transfer your valuable question data securely in the future.
+          <br><br>
+          To implement this significant improvement, users on older versions (v1.5 and below) will have their <strong>local data reset</strong> upon updating to the new version (v1.7+).
+          <br><br>
+          We made our utmost efforts to find a way to preserve the data through this transition, but unfortunately, the scale of this necessary architectural change made it impossible. We are truly sorry for this one-time inconvenience.
+          <br><br>
+          Once you update, you can immediately use the new backup feature to protect your data going forward.
+          <br><br>
+          Thank you for your understanding and for being a part of the Revise community.
+          <br>
+          - The Revise App Team
+        </p>
+      </div>
+      
       <div class="modal-buttons">
         <button id="denyBtn" class="modal-btn deny-btn">Cancel Update</button>
         <button id="acceptBtn" class="modal-btn accept-btn">I Understand, Continue</button>
@@ -349,9 +152,6 @@
     <div class="qr-code">
       <canvas id="qrCanvas"></canvas>
       <p style="font-size: 12px; color: #888;">Scan to download on your phone</p>
-    </div>
-    <div class="footer">
-      Developed by M.K. Verma
     </div>
   </div>
   
@@ -380,7 +180,7 @@
       downloadCard.style.display = "block";
       
       const version = "1.7";
-      const releaseDate = "2025-08-05";
+      const releaseDate = "2025-08-05"; // Today's date
       const apkFileName = `Revise v${version}.apk`;
 
       document.getElementById("versionText").textContent = `Version: ${version} | Release: ${releaseDate}`;
@@ -394,7 +194,7 @@
 
     denyBtn.addEventListener("click", () => {
       warningModal.style.display = "none";
-      deniedMessage.style.display = "flex"; // Use flex to center it like the other cards
+      deniedMessage.style.display = "flex";
     });
   </script>
 </body>
