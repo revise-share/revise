@@ -20,21 +20,51 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       padding: 1rem;
     }
     
+    /* Shared styles for all main content cards */
+    .content-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        max-width: 450px;
+        width: 90%;
+    }
+
+    /* Modal styles */
     .modal {
-        position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%;
-        background-color: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .modal-content {
-        background: white; padding: 2rem; border-radius: 16px; text-align: left;
-        max-width: 450px; width: 90%; box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-        display: flex; flex-direction: column; max-height: 85vh;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        max-height: 85vh;
     }
-    .modal-body { overflow-y: auto; margin: 1rem 0; padding-right: 1rem; }
-    .modal-content h2 { color: #333; margin-bottom: 0; font-size: 22px; font-weight: 700; flex-shrink: 0; }
+    .modal-body {
+        overflow-y: auto;
+        margin: 1rem 0;
+        padding-right: 1rem;
+    }
+    .modal-content h2 {
+        color: #333;
+        margin-bottom: 0;
+        font-size: 22px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
     .modal-content p { color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 0; }
     .modal-content strong { color: #c0392b; }
     .modal-buttons { display: flex; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee; flex-shrink: 0; }
@@ -44,7 +74,11 @@
     .deny-btn { background-color: #f5f5f5; color: #333; border: 1px solid #ddd; }
     .deny-btn:hover { background-color: #e0e0e0; }
 
-    .card { display: none; background: white; border-radius: 16px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); padding: 2rem; text-align: center; max-width: 420px; width: 100%; }
+    /* Main download card styles */
+    .card {
+      display: none; /* Hidden by default */
+      text-align: center;
+    }
     .logo { width: 100px; height: 100px; margin-bottom: 1rem; }
     .card h1 { font-size: 26px; color: #333; margin-bottom: 0.5rem; }
     .card p { color: #666; font-size: 16px; margin-bottom: 1rem; }
@@ -53,34 +87,41 @@
     .version { font-size: 14px; color: #888; margin-bottom: 1rem; }
     .footer { margin-top: 1.5rem; font-size: 12px; color: #999; }
 
-    /* --- CORRECTED CSS FOR DENIED MESSAGE --- */
+    /* Denied message styles */
     .denied-message {
         display: none; /* Hidden by default */
-        background: white;
-        padding: 2rem;
-        border-radius: 16px;
-        text-align: center; /* Center the text */
-        max-width: 450px;
-        width: 90%;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        
-        /* Flex properties to center the content inside the card */
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        text-align: center;
     }
     .denied-message h2 { color: #333; margin-bottom: 1rem; }
     .denied-message p { color: #555; line-height: 1.6; }
-    /* --- END OF CORRECTION --- */
-
   </style>
 </head>
 <body>
 
   <div id="warningModal" class="modal">
+    <div class="modal-content content-container">
+      <h2>Important Update Information</h2>
+      <div class="modal-body">
+        <p>
+          Hello,
+          <br><br>
+          We're writing to inform you about an important upcoming update to the Revise app. We are excited to introduce a powerful new offline <strong>Backup and Restore</strong> feature. This will allow you to save and transfer your valuable question data securely in the future.
+          <br><br>
+          To implement this significant improvement, users on older versions will have their <strong>local data reset</strong> upon updating.
+          <br><br>
+          We are truly sorry for this one-time inconvenience. Once you update, you can immediately use the new backup feature to protect your data going forward.
+          <br><br>
+          Thank you for your understanding.
+        </p>
+      </div>
+      <div class="modal-buttons">
+        <button id="denyBtn" class="modal-btn deny-btn">Cancel Update</button>
+        <button id="acceptBtn" class="modal-btn accept-btn">I Understand, Continue</button>
+      </div>
     </div>
+  </div>
 
-  <div id="downloadCard" class="card">
+  <div id="downloadCard" class="card content-container">
     <img src="logo.png" alt="App Logo" class="logo" />
     <h1>📱 Revise App</h1>
     <p>Download the latest version of the app below:</p>
@@ -95,10 +136,10 @@
     </div>
   </div>
   
-  <div id="deniedMessage" class="denied-message">
+  <div id="deniedMessage" class="denied-message content-container">
       <h2>Update Cancelled</h2>
       <p>
-          We understand you've chosen not to proceed with the update. To ensure data safety in the future, we recommend using the official app store for all updates.
+          We understand you've chosen not to proceed with the update at this time. To ensure data safety in the future, we recommend using the official app store for all updates.
       </p>
   </div>
 
@@ -109,8 +150,16 @@
     const acceptBtn = document.getElementById("acceptBtn");
     const denyBtn = document.getElementById("denyBtn");
 
+    // This function will be called when the page loads to show the modal initially
+    function showInitialModal() {
+        warningModal.style.display = "flex";
+        downloadCard.style.display = "none";
+        deniedMessage.style.display = "none";
+    }
+
     acceptBtn.addEventListener("click", () => {
       warningModal.style.display = "none";
+      deniedMessage.style.display = "none";
       downloadCard.style.display = "block";
       
       const version = "1.7";
@@ -121,15 +170,17 @@
       document.getElementById("downloadLink").href = apkFileName;
       
       const apkUrl = window.location.href.replace(/index\.html$/, "") + apkFileName;
-      QRCode.toCanvas(document.getElementById("qrCanvas"), apkUrl, {
-        width: 140
-      });
+      QRCode.toCanvas(document.getElementById("qrCanvas"), apkUrl, { width: 140 });
     });
 
     denyBtn.addEventListener("click", () => {
       warningModal.style.display = "none";
-      deniedMessage.style.display = "flex"; // This now works with the updated CSS
+      downloadCard.style.display = "none";
+      deniedMessage.style.display = "block"; // Changed from flex to block
     });
+    
+    // Show the modal as soon as the page loads
+    window.onload = showInitialModal;
   </script>
 </body>
 </html>
