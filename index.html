@@ -148,7 +148,6 @@
     .card {
       display: none;
       text-align: center;
-      animation: fadeIn 0.6s ease forwards;
     }
 
     .logo {
@@ -192,6 +191,10 @@
       color: #888;
       margin-bottom: 1rem;
     }
+    
+    .qr-code {
+      margin-top: 1rem;
+    }
 
     .footer {
       margin-top: 1.5rem;
@@ -200,27 +203,19 @@
     }
 
     .denied-message {
-      display: none;
-      text-align: center;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-      background: white;
-      animation: fadeIn 0.6s ease forwards;
+        display: none;
+        text-align: center;
     }
-
     .denied-message .emoji {
       font-size: 48px;
       margin-bottom: 1rem;
     }
-
     .denied-message h2 {
       color: #d9534f;
       font-size: 24px;
       margin-bottom: 0.5rem;
       font-weight: 700;
     }
-
     .denied-message p {
       color: #555;
       font-size: 16px;
@@ -228,7 +223,6 @@
       max-width: 360px;
       margin: 0 auto;
     }
-
     .denied-message .tip {
       font-size: 13px;
       color: #888;
@@ -238,7 +232,6 @@
 </head>
 <body>
 
-  <!-- ✨ Animated Background -->
   <div class="background-animation">
     <div class="circle" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
     <div class="circle" style="top: 40%; left: 70%; animation-delay: 3s;"></div>
@@ -247,7 +240,6 @@
     <div class="circle" style="top: 20%; left: 85%; animation-delay: 4s;"></div>
   </div>
 
-  <!-- 🚨 Modal -->
   <div id="warningModal" class="modal">
     <div class="modal-content content-container">
       <h2>🚨 Important Update🚨</h2>
@@ -267,7 +259,6 @@
     </div>
   </div>
 
-  <!-- ✅ APK Download Card -->
   <div id="downloadCard" class="card content-container">
     <img src="logo.png" alt="App Logo" class="logo" />
     <h1>📱 Revise App</h1>
@@ -278,10 +269,11 @@
       <canvas id="qrCanvas"></canvas>
       <p style="font-size: 12px; color: #888;">Scan to download on your phone</p>
     </div>
-    <div class="footer">Developed by M.K. Verma</div>
+    <div class="footer">
+      Developed by M.K. Verma
+    </div>
   </div>
 
-  <!-- ❌ Denied Message -->
   <div id="deniedMessage" class="denied-message content-container">
     <div class="emoji">❌</div>
     <h2>Update Cancelled</h2>
@@ -292,16 +284,16 @@
     <p class="tip">Tip: You can refresh the page and click “I Understand” to update anytime.</p>
   </div>
 
-  <!-- 💻 Script -->
   <script>
     const warningModal = document.getElementById("warningModal");
     const downloadCard = document.getElementById("downloadCard");
     const deniedMessage = document.getElementById("deniedMessage");
     const acceptBtn = document.getElementById("acceptBtn");
     const denyBtn = document.getElementById("denyBtn");
+    
     const version = "1.7";
-    const releaseDate = "2025-08-05";
-    const apkFileName = `Revise v${version}.apk`;
+    const releaseDate = "2025-08-06";
+    const apkFileName = `Revise-v${version}.apk`;
     const apkUrl = window.location.href.replace(/index\.html$/, "") + apkFileName;
 
     function showInitialModal() {
@@ -316,14 +308,10 @@
       downloadCard.style.display = "block";
 
       document.getElementById("versionText").textContent = `Version: ${version} | Release: ${releaseDate}`;
-      document.getElementById("downloadLink").href = apkFileName;
+      const downloadLink = document.getElementById("downloadLink");
+      downloadLink.href = apkFileName;
+      downloadLink.download = apkFileName;
       QRCode.toCanvas(document.getElementById("qrCanvas"), apkUrl, { width: 140 });
-
-      document.getElementById("downloadLink").addEventListener("click", () => {
-        console.log("APK Download clicked");
-        fetch("https://your-analytics-endpoint.com/track?event=apk_download")
-          .catch(err => console.warn("Analytics failed:", err));
-      });
     });
 
     denyBtn.addEventListener("click", () => {
@@ -334,10 +322,6 @@
 
     window.onload = () => {
       showInitialModal();
-      const userLang = navigator.language || navigator.userLanguage;
-      if (userLang.startsWith("hi")) {
-        alert("आप हिंदी उपयोगकर्ता हैं। भविष्य में हिंदी सपोर्ट उपलब्ध होगी।");
-      }
     };
   </script>
 </body>
