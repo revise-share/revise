@@ -85,149 +85,39 @@
       display: flex;
       flex-direction: column;
       max-height: 85vh;
-      animation: fadeIn 0.6s ease forwards;
     }
 
-    .modal-content h2 {
-      color: #c0392b;
-      font-size: 24px;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-
-    .modal-body {
-      overflow-y: auto;
-      color: #333;
-      font-size: 16px;
-      line-height: 1.6;
-      margin: 1rem 0;
-    }
-
-    .modal-content strong {
-      color: #c0392b;
-    }
-
-    .modal-buttons {
-      display: flex;
-      justify-content: center;
-      margin-top: 1.5rem;
-      gap: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid #eee;
-    }
-
-    .modal-btn {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .accept-btn {
-      background-color: #28a745;
-      color: white;
-    }
-
-    .accept-btn:hover {
-      background-color: #218838;
-    }
-
-    .deny-btn {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
-
-    .deny-btn:hover {
-      background-color: #f1b0b7;
-    }
+    .modal-content h2 { color: #c0392b; font-size: 24px; margin-bottom: 1rem; font-weight: 700; }
+    .modal-body { overflow-y: auto; color: #333; font-size: 16px; line-height: 1.6; margin: 1rem 0; }
+    .modal-content strong { color: #c0392b; }
+    .modal-buttons { display: flex; justify-content: center; margin-top: 1.5rem; gap: 1rem; padding-top: 1rem; border-top: 1px solid #eee; }
+    .modal-btn { padding: 12px 24px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+    .accept-btn { background-color: #28a745; color: white; }
+    .accept-btn:hover { background-color: #218838; }
+    .deny-btn { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    .deny-btn:hover { background-color: #f1b0b7; }
 
     .card {
       display: none;
       text-align: center;
     }
-
-    .logo {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 1rem;
-    }
-
-    .card h1 {
-      font-size: 26px;
-      color: #333;
-      margin-bottom: 0.5rem;
-    }
-
-    .card p {
-      color: #666;
-      font-size: 16px;
-      margin-bottom: 1rem;
-    }
-
-    .download-btn {
-      background-color: #007bff;
-      color: white;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-      display: inline-block;
-      margin-bottom: 1rem;
-    }
-
-    .download-btn:hover {
-      background-color: #0056b3;
-    }
-
-    .version {
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 1rem;
-    }
-    
-    .qr-code {
-      margin-top: 1rem;
-    }
-
-    .footer {
-      margin-top: 1.5rem;
-      font-size: 12px;
-      color: #999;
-    }
+    .logo { width: 100px; height: 100px; margin-bottom: 1rem; }
+    .card h1 { font-size: 26px; color: #333; margin-bottom: 0.5rem; }
+    .card p { color: #666; font-size: 16px; margin-bottom: 1rem; }
+    .download-btn { background-color: #007bff; color: white; padding: 14px 28px; border: none; border-radius: 8px; text-decoration: none; font-size: 18px; font-weight: 600; transition: background-color 0.3s ease; display: inline-block; margin-bottom: 1rem; }
+    .download-btn:hover { background-color: #0056b3; }
+    .version { font-size: 14px; color: #888; margin-bottom: 1rem; }
+    .qr-code { margin-top: 1rem; }
+    .footer { margin-top: 1.5rem; font-size: 12px; color: #999; }
 
     .denied-message {
         display: none;
         text-align: center;
     }
-    .denied-message .emoji {
-      font-size: 48px;
-      margin-bottom: 1rem;
-    }
-    .denied-message h2 {
-      color: #d9534f;
-      font-size: 24px;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-    .denied-message p {
-      color: #555;
-      font-size: 16px;
-      line-height: 1.6;
-      max-width: 360px;
-      margin: 0 auto;
-    }
-    .denied-message .tip {
-      font-size: 13px;
-      color: #888;
-      margin-top: 1rem;
-    }
+    .denied-message .emoji { font-size: 48px; margin-bottom: 1rem; }
+    .denied-message h2 { color: #d9534f; font-size: 24px; margin-bottom: 0.5rem; font-weight: 700; }
+    .denied-message p { color: #555; font-size: 16px; line-height: 1.6; max-width: 360px; margin: 0 auto; }
+    .denied-message .tip { font-size: 13px; color: #888; margin-top: 1rem; }
   </style>
 </head>
 <body>
@@ -292,15 +182,12 @@
     const denyBtn = document.getElementById("denyBtn");
     
     const version = "1.7";
-    const releaseDate = "2025-08-06"; // Update your release date
+    const releaseDate = "2025-08-06";
     const apkFileName = `Revise-v${version}.apk`;
-
-    // --- Paste your Google Drive File ID here ---
-    const googleDriveFileId = "1TLyA7IOZGgLRWbjhxmuswJyyFmMyAp67"; 
     
-    // --- The script constructs the rest automatically ---
-    const directDownloadUrl = https://drive.google.com/uc?export=download&id=1TLyA7IOZGgLRWbjhxmuswJyyFmMyAp67`;
- 
+    const googleDriveFileId = "1TLyA7IOZGgLRWbjhxmuswJyyFmMyAp67";  
+    const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
+
     function showInitialModal() {
       warningModal.style.display = "flex";
       downloadCard.style.display = "none";
@@ -314,9 +201,9 @@
 
       document.getElementById("versionText").textContent = `Version: ${version} | Release: ${releaseDate}`;
       const downloadLink = document.getElementById("downloadLink");
-      downloadLink.href = apkFileName;
+      downloadLink.href = directDownloadUrl;
       downloadLink.download = apkFileName;
-      QRCode.toCanvas(document.getElementById("qrCanvas"), apkUrl, { width: 140 });
+      QRCode.toCanvas(document.getElementById("qrCanvas"), directDownloadUrl, { width: 140 });
     });
 
     denyBtn.addEventListener("click", () => {
