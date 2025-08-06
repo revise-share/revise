@@ -292,10 +292,15 @@
     const denyBtn = document.getElementById("denyBtn");
     
     const version = "1.7";
-    const releaseDate = "2025-08-06";
+    const releaseDate = "2025-08-06"; // Update your release date
     const apkFileName = `Revise-v${version}.apk`;
-    const apkUrl = window.location.href.replace(/index\.html$/, "") + apkFileName;
 
+    // --- Paste your Google Drive File ID here ---
+    const googleDriveFileId = "1TLyA7IOZGgLRWbjhxmuswJyyFmMyAp67"; 
+    
+    // --- The script constructs the rest automatically ---
+    const directDownloadUrl = https://drive.google.com/uc?export=download&id=1TLyA7IOZGgLRWbjhxmuswJyyFmMyAp67`;
+ 
     function showInitialModal() {
       warningModal.style.display = "flex";
       downloadCard.style.display = "none";
